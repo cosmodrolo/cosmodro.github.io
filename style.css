@@ -34,13 +34,12 @@ header {
   text-align: center;
 }
 header img.banner {
-  width: 100%;
+  width: auto;
   height: auto;
   max-height: 400px;
   object-fit: cover;
   display: block;
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
 }
 .header-text {
   position: absolute;
