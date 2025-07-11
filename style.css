@@ -39,6 +39,8 @@ header img.banner {
   max-height: 400px;
   object-fit: cover;
   display: block;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
 }
 .header-text {
   position: absolute;
@@ -117,7 +119,7 @@ ul li {
   font-size: 1.1em;
 }
 ul li::before {
-  content: '\\2713';
+  content: '\2713';
   color: #00acc1;
   position: absolute;
   left: 0;
