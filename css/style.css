@@ -1,0 +1,181 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: url('../images/svi_logo.png') no-repeat center center / contain;
+  height: 325px;
+  width: 100%;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+header h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+header p {
+  font-size: 1.2em;
+  max-width: 600px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+nav {
+  background: #102c4e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav a:hover {
+  color: #00acc1;
+}
+.dropdown {
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #102c4e;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1001;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.menu-toggle {
+  display: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #102c4e;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+    color: white;
+  }
+}
+section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: auto;
+  animation: fadeIn 1s linear;
+}
+.services, .about, .team, .contact, .blog {
+  background: #f9f9f9;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.section-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #1b2d44;
+}
+.services ul {
+  list-style: none;
+  padding-left: 0;
+}
+.services li::before {
+  content: "\2713";
+  color: #00acc1;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.services li {
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.team-member {
+  width: 220px;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.team-member img {
+  width: 100%;
+  border-radius: 10px;
+  height: 220px;
+  object-fit: cover;
+}
+.blog-post {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.blog-post h4 {
+  margin-bottom: 10px;
+  color: #102c4e;
+}
+.wrapper {
+  flex: 1;
+}
+footer {
+  background: #102c4e;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
