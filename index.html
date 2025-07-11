@@ -6,93 +6,114 @@
   <title>SecureVets Solutions</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: #f0f2f5;
+      background-color: #f8f9fb;
       color: #333;
     }
     header {
+      position: relative;
       background-color: #1b2d44;
       color: #fff;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: center;
     }
-    header .logo {
-      display: flex;
-      align-items: center;
+    header img.banner {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
     }
-    header .logo img {
-      height: 60px;
-      margin-right: 15px;
+    .header-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     }
-    header h1 {
+    .header-text h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 3em;
     }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.1em;
-      font-weight: 400;
+    .header-text p {
+      margin-top: 10px;
+      font-size: 1.3em;
     }
     nav {
-      background-color: #122230;
-      padding: 10px 40px;
+      background-color: #14202e;
+      padding: 15px 40px;
       display: flex;
-      gap: 25px;
+      justify-content: center;
+      gap: 30px;
+      font-size: 1.1em;
     }
     nav a {
       color: #fff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
       transition: color 0.3s ease;
     }
     nav a:hover {
       color: #00bcd4;
     }
     section.hero {
-      padding: 80px 40px;
+      padding: 80px 20px;
       background: linear-gradient(to right, #1b2d44, #27405c);
       text-align: center;
       color: #fff;
     }
     section.hero h2 {
-      font-size: 3em;
-      margin-bottom: 20px;
+      font-size: 2.8em;
+      margin-bottom: 15px;
     }
     section.hero p {
-      font-size: 1.3em;
-      max-width: 700px;
+      font-size: 1.2em;
+      max-width: 800px;
       margin: 0 auto;
+      line-height: 1.6;
     }
     section {
       padding: 60px 40px;
+      max-width: 1200px;
+      margin: auto;
     }
     h3 {
       font-size: 2em;
       margin-bottom: 25px;
       color: #1b2d44;
+      text-align: center;
     }
     ul {
-      list-style: square;
-      padding-left: 25px;
+      list-style: none;
+      padding-left: 0;
     }
     ul li {
-      margin-bottom: 12px;
+      margin-bottom: 15px;
+      padding-left: 25px;
+      position: relative;
       font-size: 1.1em;
     }
-    .contact p, .about p {
+    ul li::before {
+      content: '\2713';
+      color: #00bcd4;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .about p, .contact p {
       font-size: 1.1em;
       line-height: 1.6;
+      text-align: center;
     }
     footer {
       background-color: #1b2d44;
       color: #fff;
       text-align: center;
       padding: 30px 20px;
-      font-size: 1em;
+      font-size: 0.95em;
     }
     a {
       color: #00bcd4;
@@ -105,12 +126,10 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="images\logo.png" alt="SecureVets Logo">
-      <div>
-        <h1>SecureVets Solutions</h1>
-        <p>Cybersecurity & IT Expertise from Veterans</p>
-      </div>
+    <img src="images/svsbanner.png" alt="SecureVets Banner" class="banner">
+    <div class="header-text">
+      <h1>SecureVets Solutions</h1>
+      <p>Cybersecurity & IT Expertise from Veterans</p>
     </div>
   </header>
   <nav>
