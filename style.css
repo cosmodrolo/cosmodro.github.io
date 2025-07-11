@@ -15,21 +15,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-header {
-  background: url('cosmodrolo.github.io/images/svi_logo.png') no-repeat center center / contain;
-  height: 325px;
-  width: 100%;
-  max-width: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  animation: fadeIn 1s ease-in-out;
-}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -67,31 +53,10 @@ nav a {
 nav a:hover {
   color: #00acc1;
 }
-.dropdown {
-  position: relative;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #102c4e;
-  min-width: 150px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  z-index: 1001;
-}
-.dropdown-content a {
-  display: block;
-  padding: 10px;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.menu-toggle {
-  display: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
+
+
+
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -113,17 +78,20 @@ nav a:hover {
 section {
   padding: 60px 20px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   animation: fadeIn 1s linear;
+  text-align: left;
 }
-.index .services, .about, .team, .contact, .blog {
+.index, .services, .about, .team, .contact, .blog {
   background: #f9f9f9;
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: left;
+  padding: 40px;
 }
 .section-title {
-  text-align: center;
+  text-align: left;
   font-size: 2em;
   margin-bottom: 30px;
   color: #1b2d44;
@@ -146,10 +114,10 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  justify-content: left;
 }
 .team-member {
-  width: 220px;
+  width: 350px;
   text-align: center;
   background: white;
   padding: 20px;
@@ -159,12 +127,13 @@ section {
 .team-member img {
   width: 100%;
   border-radius: 10px;
-  height: 220px;
+  height: 300px;
   object-fit: cover;
 }
 .blog-post {
   padding: 20px;
   border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 .blog-post h4 {
   margin-bottom: 10px;
