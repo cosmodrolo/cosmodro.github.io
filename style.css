@@ -116,7 +116,7 @@ section {
   margin: auto;
   animation: fadeIn 1s linear;
 }
-.services, .about, .team, .contact, .blog {
+.index .services, .about, .team, .contact, .blog {
   background: #f9f9f9;
   margin-top: 30px;
   border-radius: 10px;
