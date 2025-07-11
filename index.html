@@ -6,113 +6,146 @@
   <title>SecureVets Insights</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      position: relative;
-      background-color: #102c4e;
-      text-align: center;
-    }
-    header img.banner {
-      width: 72%;
-      max-height: 450px;
-      object-fit: cover;
-    }
-    .header-text {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-    .header-text h1 {
-      margin: 0;
-      font-size: 2.8em;
-    }
-    .header-text p {
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-    nav {
-      background-color: #1c3a5e;
-      padding: 14px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      font-size: 1.2em;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #00acc1;
-    }
-    section.hero {
-      padding: 100px 20px;
-      background: #e9f1f9;
-      text-align: center;
-      color: #1b2d44;
-    }
-    section.hero h2 {
-      font-size: 2.6em;
-      margin-bottom: 20px;
-    }
-    section.hero p {
-      font-size: 1.2em;
-      max-width: 750px;
-      margin: 0 auto;
-    }
-    section {
-      padding: 60px 30px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    .services {
-      background-color: #f6fafd;
-      border-radius: 8px;
-      padding: 60px 30px;
-    }
-    h3 {
-      font-size: 2em;
-      margin-bottom: 30px;
-      color: #1b2d44;
-      text-align: center;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    ul li {
-      margin-bottom: 20px;
-      padding-left: 30px;
-      position: relative;
-      font-size: 1.1em;
-    }
-    ul li::before {
-      content: '\2713';
-      color: #00acc1;
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-    }
-	.about {
-	background-color: #ffffff;
-	border-top: 1px solid #dde6ee;
-	border-bottom: 1px solid #dde6ee;
-	}
-	.team {
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Typography and Links */
+h3 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #1b2d44;
+  text-align: center;
+}
+a {
+  color: #00acc1;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  position: relative;
+  background-color: #102c4e;
+  text-align: center;
+}
+header img.banner {
+  width: 72%;
+  max-height: 450px;
+  object-fit: cover;
+}
+.header-text {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+.header-text h1 {
+  margin: 0;
+  font-size: 2.8em;
+}
+.header-text p {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+/* Navigation */
+nav {
+  background-color: #1c3a5e;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 1.2em;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #00acc1;
+}
+
+/* Section Base */
+section {
+  width: 100%;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+section.hero {
+  padding: 100px 20px;
+  background: #e9f1f9;
+  text-align: center;
+  color: #1b2d44;
+}
+.hero h2 {
+  font-size: 2.6em;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2em;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* Services Section */
+.services {
+  background-color: #f6fafd;
+  border-radius: 8px;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+ul li {
+  margin-bottom: 20px;
+  padding-left: 30px;
+  position: relative;
+  font-size: 1.1em;
+}
+ul li::before {
+  content: '\2713';
+  color: #00acc1;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* About Section */
+.about {
+  background-color: #ffffff;
+  border-top: 1px solid #dde6ee;
+  border-bottom: 1px solid #dde6ee;
+}
+.about p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 20px;
+}
+
+/* Team Section */
+.team {
   background-color: #f1f5f9;
   padding: 60px 30px;
   border-top: 1px solid #dde6ee;
@@ -142,34 +175,75 @@
   border-radius: 12px;
   background-color: #ddd;
 }
+
+/* Contact Section */
 .contact {
   background-color: #ffffff;
   border-top: 1px solid #dde6ee;
 }
 .contact p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 20px;
   color: #333;
 }
-    .about p, .contact p {
-      font-size: 1.1em;
-      line-height: 1.7;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto 20px;
-    }
-    footer {
-      background-color: #102c4e;
-      color: #fff;
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 0.95em;
-    }
-    a {
-      color: #00acc1;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+
+/* Footer */
+footer {
+  background-color: #102c4e;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 0.95em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header img.banner {
+    width: 100%;
+    max-height: 240px;
+  }
+  .header-text h1 {
+    font-size: 1.8em;
+  }
+  .header-text p {
+    font-size: 1em;
+  }
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+  .team-member {
+    width: 100%;
+    max-width: 300px;
+  }
+  .hero h2 {
+    font-size: 2em;
+  }
+  .hero p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-text h1 {
+    font-size: 1.5em;
+  }
+  .header-text p {
+    font-size: 0.95em;
+  }
+  .team-member img {
+    height: 200px;
+  }
+  section.hero {
+    padding: 60px 15px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -230,7 +304,7 @@
     <h3>Get in Touch</h3>
     <p>Email: <a href="mailto:info@securevetssolutions.com">info@securevetssolutions.com</a></p>
     <p>Phone: (555) 123-4567</p>
-    <p>Serving: Nationwide | In-Home & Virtual Support Available</p>
+    <p>Serving: World Wide | Virtual Support Available</p>
   </section>
   <footer>
     &copy; 2025 SecureVets Insights. Empowering Individuals. Securing Futures.
