@@ -16,7 +16,7 @@ body {
   flex-direction: column;
 }
 header {
-  background: url('../images/svi_logo.png') no-repeat center center / contain;
+  background: url('cosmodrolo.github.io/images/svi_logo.png') no-repeat center center / contain;
   height: 325px;
   width: 100%;
   max-width: 100%;
