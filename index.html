@@ -12,43 +12,43 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: #f8f9fb;
+      background-color: #ffffff;
       color: #333;
+      line-height: 1.6;
     }
     header {
       position: relative;
-      background-color: #1b2d44;
-      color: #fff;
+      background-color: #102c4e;
       text-align: center;
     }
     header img.banner {
-      width: 80%;
-      max-height: 450px;
+      width: 100%;
+      max-height: 320px;
       object-fit: cover;
     }
     .header-text {
       position: absolute;
-      top: 50%;
+      bottom: 20px;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       color: white;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
     .header-text h1 {
       margin: 0;
-      font-size: 3em;
+      font-size: 2.8em;
     }
     .header-text p {
       margin-top: 10px;
-      font-size: 1.3em;
+      font-size: 1.2em;
     }
     nav {
-      background-color: #14202e;
-      padding: 15px 40px;
+      background-color: #1c3a5e;
+      padding: 14px 20px;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      font-size: 1.1em;
+      gap: 40px;
+      font-size: 1.05em;
     }
     nav a {
       color: #fff;
@@ -57,32 +57,36 @@
       transition: color 0.3s ease;
     }
     nav a:hover {
-      color: #00bcd4;
+      color: #00acc1;
     }
     section.hero {
-      padding: 80px 20px;
-      background: linear-gradient(to right, #1b2d44, #27405c);
+      padding: 100px 20px;
+      background: #f5faff;
       text-align: center;
-      color: #fff;
+      color: #1b2d44;
     }
     section.hero h2 {
-      font-size: 2.8em;
-      margin-bottom: 15px;
+      font-size: 2.6em;
+      margin-bottom: 20px;
     }
     section.hero p {
       font-size: 1.2em;
-      max-width: 800px;
+      max-width: 750px;
       margin: 0 auto;
-      line-height: 1.6;
     }
     section {
-      padding: 60px 40px;
-      max-width: 1200px;
+      padding: 60px 30px;
+      max-width: 1100px;
       margin: auto;
+    }
+    .services {
+      background-color: #eef4f8;
+      border-radius: 8px;
+      padding: 60px 30px;
     }
     h3 {
       font-size: 2em;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       color: #1b2d44;
       text-align: center;
     }
@@ -91,32 +95,37 @@
       padding-left: 0;
     }
     ul li {
-      margin-bottom: 15px;
-      padding-left: 25px;
+      margin-bottom: 20px;
+      padding-left: 30px;
       position: relative;
       font-size: 1.1em;
     }
     ul li::before {
       content: '\2713';
-      color: #00bcd4;
+      color: #00acc1;
       position: absolute;
       left: 0;
       font-weight: bold;
     }
+    .about, .contact {
+      background-color: #ffffff;
+    }
     .about p, .contact p {
       font-size: 1.1em;
-      line-height: 1.6;
+      line-height: 1.7;
       text-align: center;
+      max-width: 900px;
+      margin: 0 auto 20px;
     }
     footer {
-      background-color: #1b2d44;
+      background-color: #102c4e;
       color: #fff;
       text-align: center;
-      padding: 30px 20px;
+      padding: 40px 20px;
       font-size: 0.95em;
     }
     a {
-      color: #00bcd4;
+      color: #00acc1;
       text-decoration: none;
     }
     a:hover {
@@ -127,10 +136,6 @@
 <body>
   <header>
     <img src="images/svi_logo.png" alt="SecureVets Insights Banner" class="banner">
-    <div class="header-text">
-      <h1>SecureVets Insights</h1>
-      <p>Empowering Seniors & Special Needs Communities in the Digital Age</p>
-    </div>
   </header>
   <nav>
     <a href="#services">Services</a>
