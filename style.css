@@ -8,6 +8,23 @@ html, body {
   height: 100%;
   margin: 0;
 }
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  padding: 20px 0;
+  background-color: #ffffff;
+}
+.banner-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+@media (max-width: 600px) {
+  .banner {
+    padding: 10px 0;
+  }
+}
 body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
@@ -15,21 +32,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-header {
-  background: url('images/svi_logo.png') no-repeat center center / contain;
-  height: 325px;
-  width: 100%;
-  max-width: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  animation: fadeIn 1s ease-in-out;
-}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -76,7 +79,7 @@ section {
   padding: 60px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  animation: fadeIn 1s linear;
+  animation: fadeIn 2s ease-in-out;
   text-align: left;
 }
 .index, .services, .about, .team, .contact, .blog {
@@ -86,6 +89,7 @@ section {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   text-align: left;
   padding: 40px;
+  animation: fadeIn 2s ease-in-out;
 }
 .section-title {
   text-align: left;
