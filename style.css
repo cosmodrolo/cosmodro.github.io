@@ -69,41 +69,8 @@ nav a {
 nav a:hover {
   color: #00acc1;
 }
-
-
-
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #102c4e;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 200px;
-    padding: 10px;
-  }
-  .nav-links.active {
-    display: flex;
-  }
-  .menu-toggle {
-    display: block;
-    color: white;
-  }
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-  .nav-links.active {
-    display: flex;
-  }
-  .menu-toggle {
-  display: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
+  
+  
 }
 section {
   padding: 60px 20px;
@@ -112,7 +79,7 @@ section {
   animation: fadeIn 1s linear;
   text-align: left;
 }
-.services, .about, .team, .contact, .blog {
+.index, .services, .about, .team, .contact, .blog {
   background: #f9f9f9;
   margin-top: 30px;
   border-radius: 10px;
@@ -144,11 +111,11 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  justify-content: left;
 }
 .team-member {
-  width: 220px;
-  text-align: left;
+  width: 375px;
+  text-align: center;
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -157,7 +124,7 @@ section {
 .team-member img {
   width: 100%;
   border-radius: 10px;
-  height: 220px;
+  height: 350px;
   object-fit: cover;
 }
 .blog-post {
