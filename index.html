@@ -4,17 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SecureVets Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5f7fa;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f2f5;
       color: #333;
     }
     header {
-      background-color: #1e2a38;
+      background-color: #1b2d44;
       color: #fff;
       padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      height: 60px;
+      margin-right: 15px;
     }
     header h1 {
       margin: 0;
@@ -23,56 +35,83 @@
     header p {
       margin: 5px 0 0;
       font-size: 1.1em;
+      font-weight: 400;
     }
     nav {
-      background-color: #14202e;
+      background-color: #122230;
       padding: 10px 40px;
       display: flex;
-      gap: 20px;
+      gap: 25px;
     }
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #00bcd4;
     }
     section.hero {
-      padding: 60px 40px;
-      background: #e1e8f0;
+      padding: 80px 40px;
+      background: linear-gradient(to right, #1b2d44, #27405c);
       text-align: center;
+      color: #fff;
     }
     section.hero h2 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    section.hero p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    section.services, section.about, section.contact {
-      padding: 40px;
-    }
-    h3 {
-      font-size: 1.8em;
+      font-size: 3em;
       margin-bottom: 20px;
     }
+    section.hero p {
+      font-size: 1.3em;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    section {
+      padding: 60px 40px;
+    }
+    h3 {
+      font-size: 2em;
+      margin-bottom: 25px;
+      color: #1b2d44;
+    }
     ul {
-      list-style: disc;
-      padding-left: 20px;
+      list-style: square;
+      padding-left: 25px;
+    }
+    ul li {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+    .contact p, .about p {
+      font-size: 1.1em;
+      line-height: 1.6;
     }
     footer {
-      background-color: #1e2a38;
+      background-color: #1b2d44;
       color: #fff;
       text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
+      padding: 30px 20px;
+      font-size: 1em;
+    }
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>SecureVets Solutions</h1>
-    <p>Cybersecurity & IT Expertise from Veterans</p>
+    <div class="logo">
+      <img src="images\logo.png" alt="SecureVets Logo">
+      <div>
+        <h1>SecureVets Solutions</h1>
+        <p>Cybersecurity & IT Expertise from Veterans</p>
+      </div>
+    </div>
   </header>
   <nav>
     <a href="#services">Services</a>
@@ -81,22 +120,22 @@
   </nav>
   <section class="hero">
     <h2>Secure. Reliable. Veteran-Owned.</h2>
-    <p>We bring military precision and discipline to your digital security. Trust SecureVets Solutions for elite cybersecurity and IT consulting services.</p>
+    <p>We bring military precision and discipline to your digital security. Trust SecureVets Solutions for elite cybersecurity and IT consulting services across commercial and federal sectors.</p>
   </section>
   <section class="services" id="services">
     <h3>Our Services</h3>
     <ul>
-      <li>Cybersecurity Risk Assessments</li>
+      <li>Cybersecurity Risk Assessments & Penetration Testing</li>
       <li>Network Design & Security Architecture</li>
       <li>Cloud Migration & Secure Cloud Services</li>
       <li>Incident Response & Threat Intelligence</li>
-      <li>Compliance & Regulatory Advisory (NIST, FedRAMP, etc.)</li>
-      <li>IT Infrastructure Consulting</li>
+      <li>Compliance & Regulatory Advisory (NIST, FedRAMP, HIPAA)</li>
+      <li>IT Infrastructure Modernization & Zero Trust Strategy</li>
     </ul>
   </section>
   <section class="about" id="about">
     <h3>About Us</h3>
-    <p>SecureVets Solutions is a veteran-owned and operated IT consulting firm founded on the principles of integrity, service, and operational excellence. Our team of former military communications and cybersecurity professionals brings decades of mission-critical experience to secure and streamline your digital operations.</p>
+    <p>SecureVets Solutions is a veteran-owned and operated IT consulting firm founded on the principles of integrity, service, and operational excellence. Our team of former military communications and cybersecurity professionals brings decades of mission-critical experience to secure and streamline your digital operations. We partner with federal agencies, defense contractors, and private organizations to build secure, resilient IT infrastructures.</p>
   </section>
   <section class="contact" id="contact">
     <h3>Contact Us</h3>
