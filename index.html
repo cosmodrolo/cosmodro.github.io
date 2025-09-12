@@ -209,7 +209,7 @@
             </div>
             <div class="preview" id="preview" style="display:none"><img alt="preview"/></div>
             <div style="grid-column:1/-1">
-              <button class="btn primary" id="publish">Publish Photo</button>
+              <button class="btn primary" id="publish" type="submit">Publish Photo</button>
             </div>
           </form>
         </div>
@@ -441,8 +441,31 @@
     f.fileName.textContent = 'Selected: ' + file.name;
     const reader = new FileReader();
     reader.onload = () => {
-      f.preview.style.display='block';
-      f.previewImg.src = reader.result;
+      const raw = reader.result;
+      // Downscale large images to fit localStorage limits (~5MB). Target max 2560px longest edge.
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 2560;
+        let { width:w, height:h } = img;
+        if (w > MAX || h > MAX){
+          const scale = Math.min(MAX / w, MAX / h);
+          w = Math.round(w * scale); h = Math.round(h * scale);
+        }
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        try{
+          const dataUrl = c.toDataURL('image/jpeg', 0.9); // compress to reduce size
+          f.preview.style.display='block';
+          f.previewImg.src = dataUrl;
+        }catch(err){
+          // Fallback to raw if canvas toDataURL fails
+          f.preview.style.display='block';
+          f.previewImg.src = raw;
+        }
+      };
+      img.src = raw;
     };
     reader.readAsDataURL(file);
   });
@@ -654,7 +677,14 @@
 
   // ===== Persistence helpers =====
   function loadPhotos(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')||[]; }catch{return []} }
-  function savePhotos(xs){ localStorage.setItem(STORAGE_KEY, JSON.stringify(xs)); }
+  function savePhotos(xs){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(xs)); }
+    catch(err){
+      try{ sessionStorage.setItem(STORAGE_KEY, JSON.stringify(xs));
+           alert('Saved to temporary session storage (private mode or storage full). The data will vanish when the tab closes. Consider using image URLs or smaller uploads.');
+      }catch(e){ alert('Could not save. Storage may be blocked or full. Try using an Image URL or a smaller image.'); }
+    }
+  }
   function loadMeta(){ try{ return JSON.parse(localStorage.getItem(META_KEY)||'{}')||{}; }catch{return {}} }
   function saveMeta(m){ localStorage.setItem(META_KEY, JSON.stringify(m)); }
   function prettyDate(iso){ if(!iso) return ''; const d=new Date(iso); return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'}); }
