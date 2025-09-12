@@ -1,202 +1,615 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A gallery of astrophotography images by Cosmodro, featuring deep sky objects and nebulae.">
-  <title>My Astrophotography Gallery</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astrofolio</title>
+  <meta name="description" content="A space‑themed astrophotography portfolio. Save locally, no backend required."/>
   <style>
-    :root {
-      --accent: #00d4ff;
-      --bg1: #000428;
-      --bg2: #004e92;
-      --text: #ffffff;
+    :root{
+      --bg-top:#030617;--bg-mid:#0b1029;--bg-bot:#0e1a38;--text:#e6e9f3;--muted:#a6b0cf;--card:#101633;--card-2:#0e1430;--accent:#7aa2ff;--accent-2:#9bd2ff;--border:rgba(255,255,255,.12);--shadow:0 10px 30px rgba(0,0,0,.45);
     }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial; color:var(--text); background:linear-gradient(to bottom,var(--bg-top),var(--bg-mid),var(--bg-bot));}
+    a{color:var(--accent)}
+    header{position:relative;z-index:2}
+    .wrap{max-width:1200px;margin:0 auto;padding:16px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.3px}
+    .muted{color:var(--muted)}
 
-    /* Base */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      background: linear-gradient(to bottom, var(--bg1), var(--bg2));
-      color: var(--text);
-      font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      overflow-x: hidden;
-      position: relative;
-    }
+    /* nav */
+    .nav{position:sticky;top:0;z-index:3;background:rgba(11,16,41,.7);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px}
+    .tab{appearance:none;border:1px solid var(--border);background:transparent;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .tab.active{background:rgba(255,255,255,.08)}
+    .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+    .search{position:relative}
+    .search input{width:240px;max-width:50vw;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);padding:8px 10px 8px 30px;border-radius:10px;outline:none}
+    .search svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);opacity:.6}
 
-    /* Starry background effect (GPU-friendly using background-position) */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
-        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
-        radial-gradient(2px 2px at 160px 30px, #eee, transparent);
-      background-repeat: repeat;
-      background-size: 200px 100px;
-      animation: twinkle 20s linear infinite;
-      z-index: -1;
-      pointer-events: none;
-    }
+    /* sections */
+    main{position:relative;z-index:1}
+    section{display:none;padding:24px 16px}
+    section.active{display:block}
 
-    @keyframes twinkle {
-      0%   { background-position: 0 0; }
-      100% { background-position: 0 -100px; }
-    }
+    /* cards grid */
+    .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      body::before { animation: none; }
-      * { scroll-behavior: auto !important; }
-    }
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .card .media{position:relative;aspect-ratio:4/3;background:black;overflow:hidden}
+    .card .media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .card:hover .media img{transform:scale(1.05)}
+    .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+    .card .meta{display:flex;justify-content:space-between;align-items:center;padding:10px 12px}
+    .title{font-weight:600}
+    .sub{font-size:12px;color:var(--muted)}
+    .btn,button,input[type="file"]::-webkit-file-upload-button{appearance:none;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071326;border:0;font-weight:600}
+    .btn.danger{background:rgba(255,0,64,.15);border-color:rgba(255,0,64,.35)}
+    .btn.small{padding:6px 10px;font-size:12px}
 
-    /* Header */
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border-bottom: 2px solid var(--accent);
-    }
+    /* forms */
+    .form{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){.form{grid-template-columns:1fr 1fr}}
+    label{display:block;font-size:12px;margin-bottom:6px;color:var(--muted)}
+    input[type="text"],input[type="date"],textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px;outline:none}
+    textarea{resize:vertical}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .preview{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:black;display:flex;align-items:center;justify-content:center}
+    .preview img{width:100%;height:320px;object-fit:contain}
+    .chip{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);margin-right:6px;margin-top:6px}
 
-    h1 {
-      font-family: 'Orbitron', monospace;
-      font-size: 3rem;
-      margin: 0 0 .25rem 0;
-      text-shadow: 0 0 10px var(--accent);
-      color: var(--accent);
-    }
+    /* modal */
+    dialog{border:1px solid var(--border);border-radius:16px;background:var(--card-2);color:var(--text);max-width:1000px;width:92vw;box-shadow:var(--shadow)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-grid{display:grid;gap:16px}
+    @media(min-width:900px){.modal-grid{grid-template-columns:1.1fr .9fr}}
+    .field{font-size:13px;margin-bottom:8px}
+    .field dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+    .field dd{margin:4px 0 0}
 
-    header p {
-      margin: 0;
-      opacity: 0.9;
-    }
+    /* footer */
+    footer{border-top:1px solid var(--border);padding:30px 16px;text-align:center;color:var(--muted)}
 
-    /* Main */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-
-    .photo-entry {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-    }
-
-    .photo-entry:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-    }
-
-    .photo-entry img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-      display: block;
-    }
-
-    .photo-entry h2 {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.5rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--accent);
-      text-align: center;
-    }
-
-    .photo-entry p {
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border-top: 2px solid var(--accent);
-      margin-top: 3rem;
-    }
-
-    footer a {
-      color: var(--accent);
-    }
-    footer a:hover { text-decoration: underline; }
-
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .gallery { gap: 1rem; }
-      .photo-entry { padding: 1rem; }
-    }
+    /* starfield */
+    #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
   </style>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
   <header>
-  <h1>🌌 Cosmodro Astrophotography</h1>
+    <div class="wrap">
+      <div class="brand">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l2.1 5.6L20 9l-5.1 3.4L16 18l-4-2.7L8 18l1.1-5.6L4 9l5.9-1.4L12 2z" stroke="url(#g)" stroke-width="1.2" fill="none"/><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#7aa2ff"/><stop offset="1" stop-color="#9bd2ff"/></linearGradient></defs></svg>
+        <h1>Astrofolio</h1>
+      </div>
+      <p class="muted" id="tagline">A space to capture the night.</p>
+    </div>
+    <div class="nav">
+      <div class="wrap" style="display:flex;align-items:center;gap:12px;">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-tab="gallery">Gallery</button>
+          <button class="tab" data-tab="add">Add Photo</button>
+          <button class="tab" data-tab="about">About</button>
+          <button class="tab" data-tab="equipment">Equipment</button>
+          <button class="tab" data-tab="backup">Backup</button>
+        </div>
+        <div class="right">
+          <div class="search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="search" placeholder="Search targets, gear, tags…" />
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
-    <div class="gallery">
-      <!-- Photo 1 -->
-      <section class="photo-entry" aria-labelledby="m31-title">
-        <a href="images/M31.png" data-lightbox="gallery" data-title="Andromeda Galaxy (M31)">
-          <img src="images/M31.png" alt="Andromeda Galaxy" loading="lazy">
-        </a>
-        <h2 id="m31-title">Andromeda Galaxy (M31)</h2>
-        <p><strong>Target:</strong> Messier 31, the Andromeda Galaxy – our nearest spiral neighbor, visible to the naked eye under dark skies.</p>
-        <p><strong>Exposures:</strong> 4 hours total (60x4min subs) with 5 darks, 20 flats, and 50 bias frames.</p>
-        <p><strong>Telescope:</strong> Celestron EdgeHD 11&quot; on a Losmandy G-11 mount. Imaged with ZWO ASI294MC Pro camera.</p>
-        <p><strong>Processing:</strong> Stacked in PixInsight, processed with curves and noise reduction for that deep-space glow.</p>
-      </section>
+    <section id="gallery" class="active">
+      <div class="wrap">
+        <div id="empty" class="card" style="display:none;padding:18px">
+          <p>No photos yet. Use the <b>Add Photo</b> tab to publish your first entry.</p>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
 
-      <!-- Photo 2 -->
-      <section class="photo-entry" aria-labelledby="m42-title">
-        <a href="http://192.168.68.61/mnt/user/photos/astronomy/M42%20-%20Orion%20Nebula.jpg" data-lightbox="gallery" data-title="Orion Nebula (M42)">
-          <img src="http://192.168.68.61/mnt/user/photos/astronomy/M42%20-%20Orion%20Nebula.jpg" alt="Orion Nebula" loading="lazy">
-        </a>
-        <h2 id="m42-title">Orion Nebula (M42)</h2>
-        <p><strong>Target:</strong> The Great Orion Nebula, a stellar nursery 1,344 light-years away, birthplace of thousands of stars.</p>
-        <p><strong>Exposures:</strong> 2.5 hours (50x3min subs), captured during a crisp winter night.</p>
-        <p><strong>Telescope:</strong> William Optics RedCat 51 refractor on an EQ6-R Pro mount. Canon EOS R6 modified for full-spectrum imaging.</p>
-        <p><strong>Processing:</strong> Blended LRGB in Photoshop, with selective sharpening to highlight the Trapezium cluster.</p>
-      </section>
+    <section id="add">
+      <div class="wrap">
+        <div class="card" style="padding:16px">
+          <h2 style="margin:6px 0 14px">Add a New Photo</h2>
+          <form id="form" class="form">
+            <div>
+              <label for="title">Target / Name</label>
+              <input id="title" type="text" required />
+            </div>
+            <div>
+              <label for="description">Notes</label>
+              <textarea id="description" rows="4"></textarea>
+            </div>
+            <div class="two">
+              <div>
+                <label for="date">Capture Date</label>
+                <input id="date" type="date" />
+              </div>
+              <div>
+                <label for="location">Location</label>
+                <input id="location" type="text" placeholder="City, State" />
+              </div>
+            </div>
+            <div class="two">
+              <div>
+                <label for="scope">Telescope</label>
+                <input id="scope" type="text" />
+              </div>
+              <div>
+                <label for="camera">Camera/Sensor</label>
+                <input id="camera" type="text" />
+              </div>
+            </div>
+            <div class="two">
+              <div>
+                <label for="mount">Mount</label>
+                <input id="mount" type="text" />
+              </div>
+              <div>
+                <label for="filters">Filters</label>
+                <input id="filters" type="text" placeholder="L-eNhance, LRGB, Ha, OIII…" />
+              </div>
+            </div>
+            <div>
+              <label for="exposureSettings">Exposure Settings (ISO/Gain, Temp, Binning…)</label>
+              <input id="exposureSettings" type="text" placeholder="Gain 100, -10°C, Bin 2x2" />
+            </div>
+            <div class="two">
+              <div>
+                <label for="exposureTime">Exposure Time / Frames</label>
+                <input id="exposureTime" type="text" placeholder="120s x 120 (4h)" />
+              </div>
+              <div>
+                <label for="integrationHours">Total Integration</label>
+                <input id="integrationHours" type="text" placeholder="4h 15m" />
+              </div>
+            </div>
+            <div>
+              <label for="processing">Processing Workflow</label>
+              <input id="processing" type="text" placeholder="WBPP → DBE → SPCC → NoiseX → Curves → LHE" />
+            </div>
+            <div>
+              <label>Tags</label>
+              <div style="display:flex;gap:8px;margin-bottom:8px">
+                <input id="tagInput" type="text" placeholder="Add a tag and click +" style="flex:1" />
+                <button type="button" class="btn" id="addTag">+</button>
+              </div>
+              <div id="tagList"></div>
+            </div>
+            <div>
+              <label for="imageUrl">Image URL (optional)</label>
+              <input id="imageUrl" type="text" placeholder="https://…" />
+            </div>
+            <div>
+              <label for="imageFile">Or Upload Image</label>
+              <input id="imageFile" type="file" accept="image/*" />
+              <div id="fileName" class="muted" style="margin-top:6px"></div>
+            </div>
+            <div class="preview" id="preview" style="display:none"><img alt="preview"/></div>
+            <div style="grid-column:1/-1">
+              <button class="btn primary" id="publish">Publish Photo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
 
-      <!-- Photo 3 -->
-      <section class="photo-entry" aria-labelledby="m16-title">
-  <img src="https://via.placeholder.com/600x400/000428/ffffff?text=Your+Photo+3" alt="Pillars of Creation" loading="lazy">
-        <h2 id="m16-title">Pillars of Creation (M16)</h2>
-        <p><strong>Target:</strong> Iconic pillars in the Eagle Nebula, as famously imaged by Hubble – towering columns of interstellar gas and dust.</p>
-        <p><strong>Exposures:</strong> 6 hours (72x5min subs) under Bortle 4 skies.</p>
-        <p><strong>Telescope:</strong> Takahashi FSQ-106ED quadruplet refractor on a Paramount ME II mount. QHY268M monochrome camera with LRGB filters.</p>
-        <p><strong>Processing:</strong> DeepSkyStacker for integration, then StarTools for deconvolution and color balancing.</p>
-      </section>
-    </div>
+    <section id="about">
+      <div class="wrap">
+        <div class="card" style="padding:16px">
+          <h2 style="margin:6px 0 14px">About Me</h2>
+          <div class="form">
+            <div>
+              <label for="owner">Name</label>
+              <input id="owner" type="text" />
+            </div>
+            <div>
+              <label for="hero">Hero Tagline (homepage)</label>
+              <input id="hero" type="text" placeholder="Deep‑sky dreams from the backyard observatory." />
+            </div>
+            <div style="grid-column:1/-1">
+              <label for="bio">Bio</label>
+              <textarea id="bio" rows="6" placeholder="Share your story: how you started, skies you chase, awards, clubs, etc."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="equipment">
+      <div class="wrap">
+        <div class="card" style="padding:16px">
+          <h2 style="margin:6px 0 14px">Equipment</h2>
+          <label for="gear">Gear List</label>
+          <textarea id="gear" rows="10" placeholder="Example
+• Telescope: 8\" Newtonian + coma corrector
+• Camera: ASI2600MC Pro
+• Filters: L-eNhance, Ha 7nm
+• Mount: EQ6‑R Pro
+• Guide: 50mm guidescope + ASI120MM
+• Control: NINA / ASIAIR
+• Processing: PixInsight, Photoshop"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section id="backup">
+      <div class="wrap">
+        <div class="card" style="padding:16px">
+          <h2 style="margin:6px 0 14px">Backup & Import</h2>
+          <div style="display:grid;gap:16px;grid-template-columns:1fr;max-width:800px">
+            <div class="card" style="padding:16px;background:rgba(255,255,255,.03)">
+              <h3 style="margin:0 0 8px">Export</h3>
+              <p class="muted">Download a JSON file containing your photos and site meta.</p>
+              <button class="btn" id="exportBtn">Export JSON</button>
+            </div>
+            <div class="card" style="padding:16px;background:rgba(255,255,255,.03)">
+              <h3 style="margin:0 0 8px">Import</h3>
+              <p class="muted">Restore from a previously exported JSON.</p>
+              <input id="importFile" type="file" accept="application/json" />
+            </div>
+            <p class="muted" style="font-size:12px">Data is stored locally in your browser using <code>localStorage</code>. To sync across devices or make this a multi‑user gallery later, connect it to a backend like Firebase/Supabase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
-  <p>&copy; 2025 Cosmodro. All rights reserved. |
-      <a href="#">Contact</a> |
-      <a href="#">More Galleries</a>
-    </p>
+    <div class="wrap">© <span id="year"></span> <span id="ownerFoot">Your Name</span>. Clear skies! ☄️</div>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+
+  <dialog id="photoModal">
+    <form method="dialog" style="margin:0">
+      <div style="padding:8px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+        <strong id="mTitle">Details</strong>
+        <button class="btn small" value="close" style="margin-left:auto">Close</button>
+      </div>
+      <div class="modal-grid" style="padding:14px">
+        <div class="media" style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:black"><img id="mImg" alt="preview" style="width:100%;height:100%;object-fit:contain"/></div>
+        <div>
+          <dl>
+            <div class="field"><dt>Captured</dt><dd id="mDate"></dd></div>
+            <div class="field"><dt>Location</dt><dd id="mLoc"></dd></div>
+            <div class="field"><dt>Telescope</dt><dd id="mScope"></dd></div>
+            <div class="field"><dt>Camera/Sensor</dt><dd id="mCam"></dd></div>
+            <div class="field"><dt>Mount</dt><dd id="mMount"></dd></div>
+            <div class="field"><dt>Filters</dt><dd id="mFilt"></dd></div>
+            <div class="field"><dt>Exposure Settings</dt><dd id="mExpSet"></dd></div>
+            <div class="field"><dt>Exposure Time / Frames</dt><dd id="mExp"></dd></div>
+            <div class="field"><dt>Total Integration</dt><dd id="mInt"></dd></div>
+            <div class="field"><dt>Processing</dt><dd id="mProc"></dd></div>
+            <div class="field"><dt>Notes</dt><dd id="mNotes"></dd></div>
+            <div class="field"><dt>Tags</dt><dd id="mTags"></dd></div>
+          </dl>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="button" class="btn" id="shareBtn">Share</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+  // ===== Storage Keys =====
+  const STORAGE_KEY = 'astrofolio.photos.v1';
+  const META_KEY = 'astrofolio.site.meta';
+
+  // ===== State =====
+  let photos = loadPhotos();
+  let meta = loadMeta();
+  let filterQuery = '';
+  let tagBuffer = [];
+  let active = null; // active photo for modal
+
+  // ===== Elements =====
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const searchEl = document.getElementById('search');
+  const yearEl = document.getElementById('year');
+  const ownerFoot = document.getElementById('ownerFoot');
+  const tagline = document.getElementById('tagline');
+
+  // form elements
+  const f = {
+    title: document.getElementById('title'),
+    description: document.getElementById('description'),
+    date: document.getElementById('date'),
+    location: document.getElementById('location'),
+    scope: document.getElementById('scope'),
+    camera: document.getElementById('camera'),
+    mount: document.getElementById('mount'),
+    filters: document.getElementById('filters'),
+    exposureSettings: document.getElementById('exposureSettings'),
+    exposureTime: document.getElementById('exposureTime'),
+    integrationHours: document.getElementById('integrationHours'),
+    processing: document.getElementById('processing'),
+    imageUrl: document.getElementById('imageUrl'),
+    imageFile: document.getElementById('imageFile'),
+    fileName: document.getElementById('fileName'),
+    preview: document.getElementById('preview'),
+    previewImg: document.querySelector('#preview img'),
+    tagInput: document.getElementById('tagInput'),
+    tagList: document.getElementById('tagList'),
+    addTag: document.getElementById('addTag'),
+    publish: document.getElementById('publish'),
+  };
+
+  const about = {
+    owner: document.getElementById('owner'),
+    hero: document.getElementById('hero'),
+    bio: document.getElementById('bio'),
+  };
+
+  const gear = document.getElementById('gear');
+
+  // modal elements
+  const modal = document.getElementById('photoModal');
+  const m = {
+    title: document.getElementById('mTitle'),
+    img: document.getElementById('mImg'),
+    date: document.getElementById('mDate'),
+    loc: document.getElementById('mLoc'),
+    scope: document.getElementById('mScope'),
+    cam: document.getElementById('mCam'),
+    mount: document.getElementById('mMount'),
+    filt: document.getElementById('mFilt'),
+    expSet: document.getElementById('mExpSet'),
+    exp: document.getElementById('mExp'),
+    int: document.getElementById('mInt'),
+    proc: document.getElementById('mProc'),
+    notes: document.getElementById('mNotes'),
+    tags: document.getElementById('mTags'),
+    share: document.getElementById('shareBtn'),
+  };
+
+  // ===== Init =====
+  yearEl.textContent = new Date().getFullYear();
+  about.owner.value = meta.owner || '';
+  about.hero.value = meta.heroTagline || '';
+  about.bio.value = meta.bio || '';
+  gear.value = meta.equipment || '';
+  ownerFoot.textContent = meta.owner || 'Your Name';
+  tagline.textContent = meta.heroTagline || 'A space to capture the night.';
+  f.date.value = new Date().toISOString().slice(0,10);
+  renderTags();
+  renderGallery();
+
+  // ===== Tabs =====
+  document.getElementById('tabs').addEventListener('click', (e) => {
+    const b = e.target.closest('.tab');
+    if (!b) return;
+    const tab = b.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active', x===b));
+    document.querySelectorAll('main section').forEach(sec=>sec.classList.toggle('active', sec.id===tab));
+    if (tab==='gallery') renderGallery();
+  });
+
+  // ===== Search =====
+  searchEl.addEventListener('input', ()=>{ filterQuery = searchEl.value.trim().toLowerCase(); renderGallery(); });
+
+  // ===== About / Equipment persistence =====
+  [about.owner, about.hero, about.bio].forEach(el=> el.addEventListener('input', () => {
+    meta.owner = about.owner.value.trim();
+    meta.heroTagline = about.hero.value.trim();
+    meta.bio = about.bio.value;
+    saveMeta(meta);
+    ownerFoot.textContent = meta.owner || 'Your Name';
+    tagline.textContent = meta.heroTagline || 'A space to capture the night.';
+  }));
+  gear.addEventListener('input', ()=>{ meta.equipment = gear.value; saveMeta(meta); });
+
+  // ===== Add Photo form =====
+  f.imageFile.addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    f.fileName.textContent = 'Selected: ' + file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      f.preview.style.display='block';
+      f.previewImg.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  f.imageUrl.addEventListener('input', () => {
+    const url = f.imageUrl.value.trim();
+    if (url) {
+      f.preview.style.display='block';
+      f.previewImg.src = url;
+    }
+  });
+
+  f.addTag.addEventListener('click', () => {
+    const t = f.tagInput.value.trim();
+    if (!t) return; tagBuffer.push(t); f.tagInput.value=''; renderTags();
+  });
+
+  document.getElementById('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!f.title.value.trim()) return;
+    let imageSrc = '';
+    if (f.previewImg.src) imageSrc = f.previewImg.src;
+    if (!imageSrc) { alert('Please provide an image (URL or upload).'); return; }
+
+    const photo = {
+      id: crypto.randomUUID(),
+      title: f.title.value.trim(),
+      description: f.description.value.trim(),
+      imageSrc,
+      captureDate: f.date.value || '',
+      scope: f.scope.value.trim(),
+      camera: f.camera.value.trim(),
+      mount: f.mount.value.trim(),
+      filters: f.filters.value.trim(),
+      exposureSettings: f.exposureSettings.value.trim(),
+      exposureTime: f.exposureTime.value.trim(),
+      integrationHours: f.integrationHours.value.trim(),
+      location: f.location.value.trim(),
+      processing: f.processing.value.trim(),
+      tags: [...tagBuffer],
+    };
+    photos = [photo, ...photos];
+    savePhotos(photos);
+    resetForm();
+    renderGallery();
+    // switch to gallery
+    document.querySelector('.tab[data-tab="gallery"]').click();
+  });
+
+  function resetForm(){
+    document.getElementById('form').reset();
+    f.fileName.textContent='';
+    f.preview.style.display='none';
+    f.previewImg.src='';
+    tagBuffer = [];
+    renderTags();
+    f.date.value = new Date().toISOString().slice(0,10);
+  }
+
+  function renderTags(){
+    f.tagList.innerHTML = '';
+    tagBuffer.forEach((t,i)=>{
+      const span = document.createElement('span');
+      span.className = 'chip';
+      span.textContent = t;
+      span.title = 'Click to remove';
+      span.addEventListener('click',()=>{ tagBuffer.splice(i,1); renderTags(); });
+      f.tagList.appendChild(span);
+    });
+  }
+
+  // ===== Gallery =====
+  function renderGallery(){
+    let list = [...photos];
+    // sort newest by captureDate
+    list.sort((a,b)=> new Date(b.captureDate||0) - new Date(a.captureDate||0));
+    if (filterQuery){
+      list = list.filter(p => [p.title,p.description,p.scope,p.camera,p.filters,(p.tags||[]).join(' ')].filter(Boolean).some(s=>s.toLowerCase().includes(filterQuery)));
+    }
+    grid.innerHTML = '';
+    if (!list.length){ empty.style.display='block'; return; } else empty.style.display='none';
+
+    list.forEach(p=>{
+      const card = document.createElement('div'); card.className='card';
+      const media = document.createElement('div'); media.className='media';
+      const img = document.createElement('img'); img.loading='lazy'; img.src=p.imageSrc; img.alt=p.title; media.appendChild(img);
+      const grad = document.createElement('div'); grad.className='grad'; media.appendChild(grad);
+      card.appendChild(media);
+
+      const metaRow = document.createElement('div'); metaRow.className='meta';
+      const left = document.createElement('div');
+      const title = document.createElement('div'); title.className='title'; title.textContent = p.title; left.appendChild(title);
+      const sub = document.createElement('div'); sub.className='sub'; sub.textContent = [p.scope, p.camera].filter(Boolean).join(' • '); left.appendChild(sub);
+      const actions = document.createElement('div'); actions.style.display='flex'; actions.style.gap='8px';
+      const btnDetails = document.createElement('button'); btnDetails.className='btn small'; btnDetails.textContent='Details';
+      btnDetails.addEventListener('click',()=>openModal(p));
+      const btnDel = document.createElement('button'); btnDel.className='btn small danger'; btnDel.textContent='Delete';
+      btnDel.addEventListener('click',()=>{ if(confirm('Delete this photo?')){ photos = photos.filter(x=>x.id!==p.id); savePhotos(photos); renderGallery(); }});
+      actions.appendChild(btnDetails); actions.appendChild(btnDel);
+      metaRow.appendChild(left); metaRow.appendChild(actions);
+      card.appendChild(metaRow);
+
+      grid.appendChild(card);
+    });
+  }
+
+  function openModal(p){
+    active = p;
+    m.title.textContent = p.title;
+    m.img.src = p.imageSrc;
+    m.date.textContent = prettyDate(p.captureDate);
+    m.loc.textContent = p.location||'';
+    m.scope.textContent = p.scope||'';
+    m.cam.textContent = p.camera||'';
+    m.mount.textContent = p.mount||'';
+    m.filt.textContent = p.filters||'';
+    m.expSet.textContent = p.exposureSettings||'';
+    m.exp.textContent = p.exposureTime||'';
+    m.int.textContent = p.integrationHours||'';
+    m.proc.textContent = p.processing||'';
+    m.notes.textContent = p.description||'';
+    m.tags.textContent = (p.tags||[]).join(', ');
+    try{ modal.showModal(); }catch{ /* Safari private mode polyfill noop */ }
+  }
+
+  m.share.addEventListener('click', async ()=>{
+    if (!active) return;
+    if (navigator.share){
+      try{ await navigator.share({ title: active.title, text: active.description||'', url: location.href }); }catch(e){}
+    } else {
+      alert('Sharing not supported on this device.');
+    }
+  });
+
+  // ===== Backup / Import =====
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify({ photos, meta }, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `astrofolio-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click(); URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('importFile').addEventListener('change', (e)=>{
+    const file = e.target.files && e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      try{
+        const parsed = JSON.parse(String(reader.result));
+        if (parsed.photos) photos = parsed.photos;
+        if (parsed.meta) { meta = parsed.meta; applyMeta(); }
+        savePhotos(photos); saveMeta(meta); renderGallery();
+      }catch{ alert('Could not import file.'); }
+    };
+    reader.readAsText(file);
+  });
+
+  function applyMeta(){
+    about.owner.value = meta.owner||'';
+    about.hero.value = meta.heroTagline||'';
+    about.bio.value = meta.bio||'';
+    gear.value = meta.equipment||'';
+    ownerFoot.textContent = meta.owner || 'Your Name';
+    tagline.textContent = meta.heroTagline || 'A space to capture the night.';
+  }
+
+  // ===== Persistence helpers =====
+  function loadPhotos(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')||[]; }catch{return []} }
+  function savePhotos(xs){ localStorage.setItem(STORAGE_KEY, JSON.stringify(xs)); }
+  function loadMeta(){ try{ return JSON.parse(localStorage.getItem(META_KEY)||'{}')||{}; }catch{return {}} }
+  function saveMeta(m){ localStorage.setItem(META_KEY, JSON.stringify(m)); }
+  function prettyDate(iso){ if(!iso) return ''; const d=new Date(iso); return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'}); }
+
+  // ===== Starfield =====
+  (function(){
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let w,h,stars,raf;
+    function resize(){ w=canvas.width=innerWidth; h=canvas.height=Math.max(innerHeight,800); makeStars(); }
+    function makeStars(){
+      const count = Math.floor((w*h)/6500);
+      stars = Array.from({length:count},()=>({ x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.2+0.2, t:Math.random()*Math.PI*2, z:Math.random()*0.6+0.4 }));
+    }
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const s of stars){ s.t += 0.02*s.z; const a=0.6+Math.sin(s.t)*0.4; ctx.fillStyle=`rgba(255,255,255,${a})`; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); }
+      raf = requestAnimationFrame(draw);
+    }
+    addEventListener('resize', resize); resize(); draw();
+  })();
+  </script>
 </body>
 </html>
