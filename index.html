@@ -90,11 +90,13 @@
     }
 
     .photo-entry {
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 0;
     }
 
     .photo-entry:hover {
@@ -156,8 +158,8 @@
     <div class="gallery">
       <!-- Photo 1 -->
       <section class="photo-entry" aria-labelledby="m31-title">
-        <a href="http://192.168.68.61/mnt/user/photos/astronomy/M31%20-%20Andromeda%20Galaxy.png" data-lightbox="gallery" data-title="Andromeda Galaxy (M31)">
-          <img src="http://192.168.68.61/mnt/user/photos/astronomy/M31%20-%20Andromeda%20Galaxy.png" alt="Andromeda Galaxy" loading="lazy">
+        <a href="images/M31.png" data-lightbox="gallery" data-title="Andromeda Galaxy (M31)">
+          <img src="images/M31.png" alt="Andromeda Galaxy" loading="lazy">
         </a>
         <h2 id="m31-title">Andromeda Galaxy (M31)</h2>
         <p><strong>Target:</strong> Messier 31, the Andromeda Galaxy – our nearest spiral neighbor, visible to the naked eye under dark skies.</p>
