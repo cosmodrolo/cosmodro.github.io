@@ -27,6 +27,8 @@ header{position:sticky;top:0;z-index:2;background:rgba(10,14,36,.72);backdrop-fi
 nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 nav a{padding:6px 10px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text)}
 nav a:hover{background:rgba(255,255,255,.06)}
+nav select{background:transparent;border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:10px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 main{padding:28px 16px}
 section{max-width:1100px;margin:0 auto}
 h2{margin:0 0 16px 0;font-size:20px}
@@ -54,8 +56,10 @@ header, main, footer{position:relative;z-index:1}
 .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:1000;display:none;justify-content:center;align-items:center;padding:20px}
 .lightbox.active{display:flex}
 .lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px}
-.lightbox-close{position:absolute;top:20px;right:20px;font-size:30px;color:var(--text);cursor:pointer;padding:10px}
-.lightbox-close:hover{color:var(--accent)}
+.lightbox-close{position:absolute;top:20px;right:20px;font-size:30px;color:var(--text);cursor:pointer;padding:10px;background:rgba(0,0,0,0.25);border-radius:8px;border:1px solid rgba(255,255,255,0.06)}
+.lightbox-close:hover{color:var(--accent);background:rgba(255,255,255,0.03)}
+.lightbox-close:focus{outline:none}
+.lightbox-close:focus-visible{box-shadow:0 0 0 3px rgba(141,179,255,0.16);border-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -73,6 +77,14 @@ header, main, footer{position:relative;z-index:1}
 <nav>
 <a href="#gallery">Gallery</a>
 </nav>
+<label class="sr-only" for="sort-select">Sort gallery</label>
+<nav>
+  <select id="sort-select" aria-label="Sort gallery">
+    <option value="name-asc">Sort: Name (A → Z)</option>
+    <option value="date-desc">Sort: Date (new → old)</option>
+    <option value="date-asc">Sort: Date (old → new)</option>
+  </select>
+</nav>
 </div>
 </header>
 <main>
@@ -82,7 +94,67 @@ header, main, footer{position:relative;z-index:1}
 <div class="grid">
 <!-- ▶▶ PHOTO CARD START -->
 <article class="card">
-<a class="media" href="javascript:void(0)" data-lightbox="images/NGC253_Sculpter_Galaxy.jpg" title="NGC 253 — Sculptor Galaxy">
+<a class="media" href="images/M11 - Wild Duck Cluster.jpg" data-lightbox="images/M11 - Wild Duck Cluster.jpg" title="M11 — Wild Duck Cluster">
+  <img src="images/M11 - Wild Duck Cluster.jpg" alt="M11 — Wild Duck Cluster" />
+</a>
+<div class="info">
+  <h3 class="title">M11 — Wild Duck Cluster</h3>
+  <p class="sub">Captured: 2025‑09‑14 • Telescope: Celestron Origin</p>
+  <ul class="specs">
+    <li><strong>Exposure:</strong> 10s × 60 (10m)</li>
+    <li><strong>Settings:</strong> ISO 200</li>
+    <li><strong>Filters:</strong> Clear</li>
+    <li><strong>Mount:</strong> EQ Mode</li>
+    <li><strong>Processing:</strong> PixInsight → Adobe Lightroom</li>
+    <li><strong>Location:</strong> Bortle 4, Colorado</li>
+  </ul>
+  <p class="notes">Messier 11, nicknamed the Wild Duck Cluster, is a rich open star cluster located about 6,000 light-years away in the constellation Scutum. It contains nearly 3,000 stars packed into a relatively small region, making it one of the densest and most impressive open clusters known. The cluster spans about 20 light-years across and is estimated to be around 220 million years old. Its name comes from the way its brighter stars form a V-shaped pattern that resembles a flock of ducks in flight.</p>
+</div>
+</article>
+<!-- ◀◀ PHOTO CARD END -->
+<!-- ▶▶ PHOTO CARD START -->
+<article class="card">
+<a class="media" href="images/M31.jpg" data-lightbox="images/M31.jpg" title="M31 — Andromeda Galaxy">
+<img src="images/M31.jpg" alt="M31 — Andromeda Galaxy" />
+</a>
+<div class="info">
+<h3 class="title">M31 — Andromeda Galaxy</h3>
+<p class="sub">Captured: 2023‑10‑21 • Telescope: 200mm reflector • Camera: DSLR</p>
+<ul class="specs">
+<li><strong>Exposure:</strong> 120s × 50 (1h 40m)</li>
+<li><strong>Settings:</strong> ISO 800</li>
+<li><strong>Filters:</strong> Clear / broadband</li>
+<li><strong>Mount:</strong> EQ Mount</li>
+<li><strong>Processing:</strong> DeepSkyStacker → Lightroom</li>
+<li><strong>Location:</strong> Suburban backyard</li>
+</ul>
+<p class="notes">The nearest spiral galaxy to the Milky Way and visible as a faint smudge to the naked eye under dark skies.</p>
+</div>
+</article>
+<!-- ◀◀ PHOTO CARD END -->
+<!-- ▶▶ PHOTO CARD START -->
+<article class="card">
+<a class="media" href="images/M42.jpg" data-lightbox="images/M42.jpg" title="M42 — Orion Nebula">
+<img src="images/M42.jpg" alt="M42 — Orion Nebula" />
+</a>
+<div class="info">
+<h3 class="title">M42 — Orion Nebula</h3>
+<p class="sub">Captured: 2024‑12‑03 • Telescope: 80mm APO • Camera: ASI294MM Pro</p>
+<ul class="specs">
+<li><strong>Exposure:</strong> 60s × 200 (3h 20m)</li>
+<li><strong>Settings:</strong> Gain 120, −15 °C</li>
+<li><strong>Filters:</strong> Narrowband / RGB mix</li>
+<li><strong>Mount:</strong> HEQ5</li>
+<li><strong>Processing:</strong> Stacked in Siril, processed in Photoshop</li>
+<li><strong>Location:</strong> Bortle 3, WY</li>
+</ul>
+<p class="notes">Classic bright emission nebula in Orion. Composite blend to reveal rich nebulosity and dust lanes.</p>
+</div>
+</article>
+<!-- ◀◀ PHOTO CARD END -->
+<!-- ▶▶ PHOTO CARD START -->
+<article class="card">
+<a class="media" href="images/NGC253_Sculpter_Galaxy.jpg" data-lightbox="images/NGC253_Sculpter_Galaxy.jpg" title="NGC 253 — Sculptor Galaxy">
 <img src="images/NGC253_Sculpter_Galaxy.jpg" alt="NGC 253 — Sculptor Galaxy" />
 </a>
 <div class="info">
@@ -100,53 +172,13 @@ header, main, footer{position:relative;z-index:1}
 </div>
 </article>
 <!-- ◀◀ PHOTO CARD END -->
-<!-- ▶▶ PHOTO CARD START -->
-<article class="card">
-<a class="media" href="javascript:void(0)" data-lightbox="images/M42.jpg" title="Eastern Veil Nebula">
-<img src="images/M42.jpg" alt="Eastern Veil Nebula in narrowband with filamentary structure" />
-</a>
-<div class="info">
-<h3 class="title">NGC 6992 — Eastern Veil Nebula</h3>
-<p class="sub">Captured: 2025‑08‑15 • Telescope: 80mm APO • Camera: ASI294MM Pro</p>
-<ul class="specs">
-<li><strong>Exposure:</strong> 180s × 100 (5h)</li>
-<li><strong>Settings:</strong> Gain 120, −15 °C</li>
-<li><strong>Filters:</strong> Hα, OIII (bicolor)</li>
-<li><strong>Mount:</strong> HEQ5</li>
-<li><strong>Processing:</strong> SHO blend, decon, gentle HDR</li>
-<li><strong>Location:</strong> Bortle 3, WY</li>
-</ul>
-<p class="notes">Strong OIII signal; combined as HOO with a touch of synthetic green.</p>
-</div>
-</article>
-<!-- ◀◀ PHOTO CARD END -->
-<!-- ▶▶ PHOTO CARD START -->
-<article class="card">
-<a class="media" href="javascript:void(0)" data-lightbox="images/veil.jpg" title="Eastern Veil Nebula">
-<img src="images/veil.jpg" alt="Eastern Veil Nebula in narrowband with filamentary structure" />
-</a>
-<div class="info">
-<h3 class="title">NGC 6992 — Eastern Veil Nebula</h3>
-<p class="sub">Captured: 2025‑08‑15 • Telescope: 80mm APO • Camera: ASI294MM Pro</p>
-<ul class="specs">
-<li><strong>Exposure:</strong> 180s × 100 (5h)</li>
-<li><strong>Settings:</strong> Gain 120, −15 °C</li>
-<li><strong>Filters:</strong> Hα, OIII (bicolor)</li>
-<li><strong>Mount:</strong> HEQ5</li>
-<li><strong>Processing:</strong> SHO blend, decon, gentle HDR</li>
-<li><strong>Location:</strong> Bortle 3, WY</li>
-</ul>
-<p class="notes">Strong OIII signal; combined as HOO with a touch of synthetic green.</p>
-</div>
-</article>
-<!-- ◀◀ PHOTO CARD END -->
 </div>
 </section>
 </main>
 <!-- Lightbox container -->
-<div class="lightbox" id="lightbox">
-<img src="" alt="Lightbox image" id="lightbox-img">
-<span class="lightbox-close" id="lightbox-close">&times;</span>
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <img src="" alt="Lightbox image" id="lightbox-img">
+  <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close dialog">&times;</button>
 </div>
 <footer>
 © <script>document.write(new Date().getFullYear())</script> Your Name. Clear skies! ☄️
@@ -201,16 +233,110 @@ lightboxImg.title = imgTitle;
 lightbox.classList.add('active');
 });
 });
+// set aria and focus when opening
+triggers.forEach(trigger => {
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    lightbox.setAttribute('aria-hidden', 'false');
+    const close = document.getElementById('lightbox-close');
+    if (close) close.focus();
+  });
+});
 closeBtn.addEventListener('click', () => {
-lightbox.classList.remove('active');
-lightboxImg.src = '';
+  lightbox.classList.remove('active');
+  lightboxImg.src = '';
+  lightbox.setAttribute('aria-hidden', 'true');
+  closeBtn.blur();
 });
 lightbox.addEventListener('click', (e) => {
-if (e.target === lightbox) {
-lightbox.classList.remove('active');
-lightboxImg.src = '';
-}
+  if (e.target === lightbox) {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
 });
+// close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+});
+})();
+
+// Gallery sorting utility
+(function(){
+  const grid = document.querySelector('.grid');
+  const select = document.getElementById('sort-select');
+  if (!grid || !select) return;
+
+  function parseDateFromSub(subText){
+    // Try multiple common date formats. Prefer ISO-style (YYYY-MM-DD),
+    // fall back to natural-language dates parsable by Date.
+    if (!subText) return null;
+    // Normalize any unicode hyphen-like chars to normal hyphen
+    const norm = subText.replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g,'-');
+    // ISO like 2025-09-14
+    let m = norm.match(/(\d{4}-\d{2}-\d{2})/);
+    if (m) return new Date(m[1]);
+    // Try common U.S. style: 'Sep 16, 2025' or 'September 16, 2025'
+    m = norm.match(/([A-Za-z]{3,9}\s+\d{1,2},\s*\d{4})/);
+    if (m) {
+      const d = new Date(m[1]);
+      if (!isNaN(d)) return d;
+    }
+    // Try day-month-year like '16 Sep 2025' or '16 September 2025'
+    m = norm.match(/(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})/);
+    if (m) {
+      const d = new Date(m[1]);
+      if (!isNaN(d)) return d;
+    }
+    // Try numeric US style mm/dd/yyyy
+    m = norm.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
+    if (m) {
+      const d = new Date(m[1]);
+      if (!isNaN(d)) return d;
+    }
+    return null;
+  }
+
+  function getCardData(card){
+    const titleEl = card.querySelector('.title');
+    const subEl = card.querySelector('.sub');
+    const title = titleEl ? titleEl.textContent.trim() : '';
+    const sub = subEl ? subEl.textContent.trim() : '';
+    const date = sub ? parseDateFromSub(sub) : null;
+    return {card, title, sub, date};
+  }
+
+  function sortCards(mode){
+    const items = Array.from(grid.querySelectorAll('.card')).map(getCardData);
+    if(mode === 'name-asc'){
+      items.sort((a,b)=> a.title.localeCompare(b.title, undefined, {sensitivity:'base'}));
+    } else if(mode === 'date-desc'){
+      items.sort((a,b)=> (b.date||0) - (a.date||0));
+    } else if(mode === 'date-asc'){
+      items.sort((a,b)=> (a.date||0) - (b.date||0));
+    }
+    // re-append in order
+    const frag = document.createDocumentFragment();
+    items.forEach(i => frag.appendChild(i.card));
+    grid.appendChild(frag);
+  }
+
+  // initialize
+  sortCards(select.value || 'name-asc');
+
+  select.addEventListener('change', ()=> sortCards(select.value));
+
+  // Auto-sort when new cards are added
+  const mo = new MutationObserver((mutations)=>{
+    let added = false;
+    for(const m of mutations){ if(m.addedNodes && m.addedNodes.length) { added = true; break; } }
+    if(added) sortCards(select.value);
+  });
+  mo.observe(grid, {childList:true, subtree:false});
 })();
 </script>
 </body>
